@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
@@ -11,9 +12,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val manageSubscriptionBtn =  findViewById<Button>(R.id.manageSubscriptionBtn)
-        manageSubscriptionBtn.setOnClickListener {
-            val intent = Intent(this, ManageSubscription::class.java)
+        val txtBtnReset : TextView = findViewById(R.id.text_reset)
+        txtBtnReset.setOnClickListener{
+            val intent = Intent(this, ResetPassword::class.java)
+            startActivity(intent)
+        }
+
+        val btnSignUp : Button = findViewById(R.id.button_sign_up)
+        btnSignUp.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+        }
+
+
+        val btnLogin = findViewById<Button>(R.id.button_login)
+        btnLogin.setOnClickListener {
+            val intent = Intent(this, IncomeAndExpense::class.java)
             startActivity(intent)
         }
     }

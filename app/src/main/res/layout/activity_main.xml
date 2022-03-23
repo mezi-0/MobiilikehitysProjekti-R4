@@ -31,176 +31,75 @@
         tools:layout_editor_absoluteY="0dp" />
 
 
+    <EditText
+        android:id="@+id/text_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:hint="Username"
+        android:background="@color/white"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/text_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Password"
+        android:background="@color/white"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_username" />
+
     <TextView
-        android:id="@+id/accountInformationText"
+        android:id="@+id/text_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:text="Reset password"
         android:textColor="@color/white"
-        android:text="Account information"
-        android:textSize="38sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        android:textSize="16sp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <Button
+        android:id="@+id/button_login"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:shape = "rectangle"
-        android:radius = "15dp"
-        app:layout_constraintBottom_toTopOf="@+id/manageSubscriptionBtn"
-        app:layout_constraintStart_toStartOf="@+id/accountInformationText"
-        app:layout_constraintTop_toBottomOf="@+id/accountInformationText"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Username"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/accountInformationText"
-            app:layout_constraintTop_toBottomOf="@+id/accountInformationText" />
-
-        <TextView
-            android:id="@+id/emailText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Email address"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/usernameText"
-            app:layout_constraintTop_toBottomOf="@+id/usernameText" />
-
-        <TextView
-            android:id="@+id/nameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Name"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/emailText"
-            app:layout_constraintTop_toBottomOf="@+id/emailText" />
-
-        <TextView
-            android:id="@+id/addressText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Address"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/nameText"
-            app:layout_constraintTop_toBottomOf="@+id/nameText" />
-
-        <TextView
-            android:id="@+id/subscriptionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Sub status"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/addressText"
-            app:layout_constraintTop_toBottomOf="@+id/addressText" />
-
-    </LinearLayout>
+        android:layout_height="50dp"
+        android:background="@drawable/buttons_color"
+        android:text="Login"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_sign_up"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
     <Button
-        android:id="@+id/manageSubscriptionBtn"
-        android:layout_width="250dp"
+        android:id="@+id/button_sign_up"
+        android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/buttons_color"
-        android:text="Manage subscription"
-        app:layout_constraintBottom_toTopOf="@+id/changePasswordBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/changePasswordBtn"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/buttons_color"
-        android:ellipsize="middle"
-        android:text="Change password"
-        android:textSize="14sp"
+        android:text="Sign up"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/manageSubscriptionBtn"
-        app:layout_constraintEnd_toEndOf="@+id/accountInformationText"
-        app:layout_constraintTop_toBottomOf="@+id/accountInformationText"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/usernameTextDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Username from db"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/accountInformationText"
-            app:layout_constraintTop_toBottomOf="@+id/accountInformationText" />
-
-        <TextView
-            android:id="@+id/emailTextDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Email from db"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/usernameTextDB"
-            app:layout_constraintTop_toTopOf="@+id/emailText" />
-
-        <TextView
-            android:id="@+id/nameTextDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Name from db"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/emailTextDB"
-            app:layout_constraintTop_toTopOf="@+id/nameText" />
-
-        <TextView
-            android:id="@+id/addressTextDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Address from db"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/nameTextDB"
-            app:layout_constraintTop_toTopOf="@+id/addressText" />
-
-        <TextView
-            android:id="@+id/subscriptionTextDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Sub status from db"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/addressTextDB"
-            app:layout_constraintTop_toTopOf="@+id/subscriptionText" />
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_login"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

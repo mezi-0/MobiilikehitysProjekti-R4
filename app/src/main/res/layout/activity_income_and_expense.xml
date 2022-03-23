@@ -4,154 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageSubscription">
+    tools:context=".IncomeAndExpense">
 
 
     <!--Background darkening or lightening-->
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/black"
         android:alpha="1"
+        android:background="@color/black"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp">
+
+    </RelativeLayout>
     <!--Background darkening or lightening-->
 
     <!--Background image-->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/backgroundimage"
         android:alpha="0.30"
+        android:background="@drawable/backgroundimage"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
     <!--Background image-->
-
 
 
     <!--Activity main title-->
     <TextView
-        android:id="@+id/subscriptionInfo"
-        android:layout_width="wrap_content"
+        android:id="@+id/tulotMenotInfo"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Own subscription"
+        android:text="Tulot ja menot"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="38sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.1" />
     <!--Activity main title-->
 
 
-
-    <!--Left table-->
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="150dp"
+        android:id="@+id/tulotMenotLayout1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:shape = "rectangle"
-        android:radius = "15dp"
-        app:layout_constraintBottom_toTopOf="@+id/premiumJoinBtn"
-        app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-        app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo"
+
+        app:layout_constraintBottom_toTopOf="@+id/tulotMenotLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/tulotMenotInfo"
+        app:layout_constraintStart_toStartOf="@+id/tulotMenotInfo"
+        app:layout_constraintTop_toBottomOf="@+id/tulotMenotInfo"
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/subscriptionStatus"
+            android:id="@+id/tulotMenotText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tulot/menot info 1"
             android:textColor="@color/white"
-            android:text="Status"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
-
         <TextView
-            android:id="@+id/subscriptionDurationInfo"
+            android:id="@+id/tulotMenotText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tulot/menot info 2"
             android:textColor="@color/white"
-            android:text="Duration"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
+            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+        <TextView
+            android:id="@+id/tulotMenotText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tulot/menot info 3"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
+            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+        <TextView
+            android:id="@+id/tulotMenotText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tulot/menot info 4"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
     </LinearLayout>
-    <!--Left table-->
 
-
-
-    <!--Right table-->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tulotMenotLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_marginVertical="25dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/premiumJoinBtn"
-        app:layout_constraintEnd_toEndOf="@+id/subscriptionInfo"
-        app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/statusInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Status from db"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
-
-        <TextView
-            android:id="@+id/durationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Duration from db"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
-    </LinearLayout>
-    <!--Right table-->
-
-
-
-    <!---->
-    <TextView
-        android:id="@+id/premiumCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(€)"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-
-        app:layout_constraintEnd_toEndOf="@+id/premiumJoinBtn"
-        app:layout_constraintStart_toStartOf="@+id/premiumJoinBtn"
-        app:layout_constraintTop_toBottomOf="@+id/premiumJoinBtn" />
-    <!---->
-
-
-
-    <!--All buttons at page-->
-    <Button
-        android:id="@+id/premiumJoinBtn"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/buttons_color"
-        android:ellipsize="middle"
-        android:text="Join premium"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--All buttons at page-->
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
