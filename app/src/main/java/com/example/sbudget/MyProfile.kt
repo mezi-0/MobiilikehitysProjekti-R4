@@ -7,20 +7,31 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import androidx.core.view.get
+import com.example.sbudget.databinding.ActivityIncomeAndExpenseBinding
+import com.example.sbudget.databinding.ActivityMyProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyProfile : AppCompatActivity() {
+
+    lateinit var binding: ActivityMyProfileBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_profile)
+        binding = ActivityMyProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-
-        val navigationMenu : BottomNavigationView = findViewById(R.id.bottom_navigation)
-        when (navigationMenu.id) {
-            R.id.ic_graph -> startActivity(Intent(this, IncomeAndExpense::class.java))
-            R.id.ic_person -> startActivity(Intent(this, MyProfile::class.java))
+        binding.bNav.selectedItemId = R.id.ic_person
+        binding.bNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.ic_graph -> {
+                    val intent = Intent(this, IncomeAndExpense::class.java)
+                    finish()
+                    startActivity(intent)
+                }
+            }
+            true
         }
+
 
         val manageSubscriptionBtn =  findViewById<Button>(R.id.manageSubscriptionBtn)
         manageSubscriptionBtn.setOnClickListener {
@@ -35,6 +46,10 @@ class MyProfile : AppCompatActivity() {
         }
     }
 
+
+
+    // Toolbar
+/*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -54,5 +69,5 @@ class MyProfile : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
+*/
 }

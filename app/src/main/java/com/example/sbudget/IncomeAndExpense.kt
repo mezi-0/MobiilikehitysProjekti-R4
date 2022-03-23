@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.example.sbudget.databinding.ActivityIncomeAndExpenseBinding
 
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
@@ -17,14 +18,31 @@ import com.github.mikephil.charting.data.BarEntry
 
 class IncomeAndExpense : AppCompatActivity() {
 
+    lateinit var binding: ActivityIncomeAndExpenseBinding
     lateinit var barList: ArrayList<BarEntry>
     lateinit var barDataSet: BarDataSet
     lateinit var barData: BarData
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_income_and_expense)
+        binding = ActivityIncomeAndExpenseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.bNav.selectedItemId = R.id.ic_graph
+        binding.bNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.ic_person -> {
+                    val intent = Intent(this, MyProfile::class.java)
+                    finish()
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+
+
 
         //!!! Charts !!!//
 
@@ -49,6 +67,9 @@ class IncomeAndExpense : AppCompatActivity() {
 
     }
 
+
+    // Toolbar
+    /*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -67,6 +88,6 @@ class IncomeAndExpense : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
+*/
 }
 
