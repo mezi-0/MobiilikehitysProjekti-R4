@@ -1,14 +1,19 @@
 package com.example.sbudget
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
+
+import android.content.Intent
+import android.graphics.Color
+
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+
 
 class IncomeAndExpense : AppCompatActivity() {
 
@@ -20,7 +25,6 @@ class IncomeAndExpense : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_income_and_expense)
-
 
         //!!! Charts !!!//
 
@@ -41,9 +45,28 @@ class IncomeAndExpense : AppCompatActivity() {
         barDataSet.valueTextSize = 15f
 
 
-
         //!!! Charts !!!//
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if(id == R.id.ic_person) {
+
+            val intent = Intent (this, MyProfile::class.java)
+            finish()
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
+

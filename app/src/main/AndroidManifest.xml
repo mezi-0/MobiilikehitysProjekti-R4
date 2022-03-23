@@ -23,7 +23,6 @@
         <!-- Launcher activity -->
 
 
-
         <activity
             android:name=".SignUp"
             android:exported="false" />
@@ -34,7 +33,7 @@
             android:name=".MyProfile"
             android:exported="false" />
         <activity
-            android:name=".IncomeAndExpense"
+            android:name=".fragments.IncomeAndExpense"
             android:exported="false" />
         <activity
             android:name=".ChangePassword"

@@ -3,14 +3,21 @@ package com.example.sbudget
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.TextView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val txtBtnReset : TextView = findViewById(R.id.text_reset)
         txtBtnReset.setOnClickListener{
@@ -28,7 +35,9 @@ class MainActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.button_login)
         btnLogin.setOnClickListener {
             val intent = Intent(this, IncomeAndExpense::class.java)
+            finish()
             startActivity(intent)
         }
     }
+
 }
