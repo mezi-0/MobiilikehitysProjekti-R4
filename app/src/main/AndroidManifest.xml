@@ -33,7 +33,7 @@
             android:name=".MyProfile"
             android:exported="false" />
         <activity
-            android:name=".fragments.IncomeAndExpense"
+            android:name=".IncomeAndExpense"
             android:exported="false" />
         <activity
             android:name=".ChangePassword"
