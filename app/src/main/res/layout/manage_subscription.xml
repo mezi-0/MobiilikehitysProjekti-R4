@@ -7,29 +7,27 @@
     tools:context=".ManageSubscription">
 
 
-    <!--Background darkening or lightening-->
-    <RelativeLayout
+    <!--Background image and that's darkening-->
+    <FrameLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/black"
-        android:alpha="1"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-    <!--Background darkening or lightening-->
+        tools:layout_editor_absoluteY="0dp"/>
 
-    <!--Background image-->
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/backgroundimage"
         android:alpha="0.30"
+        android:background="@drawable/background_image"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-    <!--Background image-->
+    <!--Background image and that's darkening-->
 
 
 
@@ -38,7 +36,7 @@
         android:id="@+id/subscriptionInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Own subscription"
+        android:text="@string/subscription_title"
         android:textColor="@color/white"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,15 +140,17 @@
     <Button
         android:id="@+id/premiumJoinBtn"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="88dp"
-        android:background="@drawable/buttons_color"
+        android:backgroundTint="#318CCD"
+        android:textColor="@color/black"
+        app:cornerRadius="25dp"
         android:ellipsize="middle"
         android:text="Join premium"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
     <!--All buttons at page-->
 

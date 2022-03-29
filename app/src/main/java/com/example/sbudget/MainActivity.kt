@@ -19,11 +19,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val txtBtnReset : TextView = findViewById(R.id.text_reset)
+        val txtBtnReset : TextView = findViewById(R.id.button_reset)
         txtBtnReset.setOnClickListener{
             val intent = Intent(this, ResetPassword::class.java)
             startActivity(intent)
         }
+
 
         val btnSignUp : Button = findViewById(R.id.button_sign_up)
         btnSignUp.setOnClickListener {

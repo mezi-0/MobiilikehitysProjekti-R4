@@ -19,43 +19,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
 
-    <!--Background darkening or lightening-->
-    <RelativeLayout
+    <!--Background image and that's darkening-->
+    <FrameLayout
         android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:alpha="1"
         android:background="@color/black"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"/>
 
-    </RelativeLayout>
-    <!--Background darkening or lightening-->
-
-    <!--Background image-->
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:alpha="0.30"
-        android:background="@drawable/backgroundimage"
+        android:background="@drawable/background_image"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-    <!--Background image-->
+    <!--Background image and that's darkening-->
 
 
     <!--Activity main title-->
     <TextView
         android:id="@+id/tulotMenotInfo"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tulot ja menot"
+        android:text="@string/income_and_expense_title"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -18,30 +18,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
 
-    <RelativeLayout
-
-        android:id="@+id/relativeLayout2"
+    <!--Background image and that's darkening-->
+    <FrameLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:alpha="1"
         android:background="@color/black"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"/>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/backgroundimage"
         android:alpha="0.30"
+        android:background="@drawable/background_image"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
+    <!--Background image and that's darkening-->
 
 
     <TextView
@@ -49,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Account information"
+        android:text="@string/my_profile_title"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -128,9 +125,12 @@
     <Button
         android:id="@+id/manageSubscriptionBtn"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/buttons_color"
+        android:backgroundTint="#318CCD"
+        android:textColor="@color/black"
+        app:cornerRadius="150dp"
+        android:textSize="16sp"
         android:text="Manage subscription"
         app:layout_constraintBottom_toTopOf="@+id/changePasswordBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,12 +140,14 @@
     <Button
         android:id="@+id/changePasswordBtn"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="88dp"
-        android:background="@drawable/buttons_color"
+        android:backgroundTint="#318CCD"
+        android:textColor="@color/black"
+        app:cornerRadius="150dp"
         android:ellipsize="middle"
         android:text="Change password"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

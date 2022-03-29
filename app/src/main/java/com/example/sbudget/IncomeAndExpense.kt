@@ -1,15 +1,10 @@
 package com.example.sbudget
 
 import androidx.appcompat.app.AppCompatActivity
-
 import android.content.Intent
 import android.graphics.Color
-
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import com.example.sbudget.databinding.ActivityIncomeAndExpenseBinding
-
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -43,19 +38,19 @@ class IncomeAndExpense : AppCompatActivity() {
         }
 
 
-
         //!!! Charts !!!//
-
 
         val barChart = findViewById<BarChart>(R.id.barChart)
         barList=ArrayList()
 
+
         // 10 lines for barChart
         for (i in 0..10) {
-            barList.add(BarEntry(i.toFloat(), (250..1250).random().toFloat()))
+            barList.add(BarEntry(i.toFloat(), (-1250..1250).random().toFloat()))
         }
         // List settings
-        barDataSet = BarDataSet(barList, "Test")
+        barDataSet = BarDataSet(barList, "IncomeAndExpense Diagram")
+
         barData = BarData(barDataSet)
         barDataSet.setColors(Color.rgb(61,165,255))
         barChart.data = barData // Adding a list to barChart
@@ -66,6 +61,8 @@ class IncomeAndExpense : AppCompatActivity() {
         //!!! Charts !!!//
 
     }
+
+
 
 
     // Toolbar
