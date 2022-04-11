@@ -3,6 +3,8 @@ package com.example.sbudget
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import com.example.sbudget.databinding.ActivityMyProfileBinding
 
@@ -17,7 +19,7 @@ class MyProfile : AppCompatActivity() {
 
         binding.bNav.selectedItemId = R.id.ic_person
         binding.bNav.setOnItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.ic_graph -> {
                     val intent = Intent(this, IncomeAndExpense::class.java)
                     finish()
@@ -28,7 +30,7 @@ class MyProfile : AppCompatActivity() {
         }
 
 
-        val manageSubscriptionBtn =  findViewById<Button>(R.id.manageSubscriptionBtn)
+        val manageSubscriptionBtn = findViewById<Button>(R.id.manageSubscriptionBtn)
         manageSubscriptionBtn.setOnClickListener {
             val intent = Intent(this, ManageSubscription::class.java)
             startActivity(intent)
@@ -40,11 +42,10 @@ class MyProfile : AppCompatActivity() {
             startActivity(intent)
         }
     }
+}
 
 
-
-    // Toolbar
-/*
+    /*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -64,5 +65,6 @@ class MyProfile : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-*/
 }
+
+*/

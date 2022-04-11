@@ -8,7 +8,15 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,10 +42,35 @@ class MainActivity : AppCompatActivity() {
 
 
         val btnLogin = findViewById<Button>(R.id.button_login)
+        val username = findViewById<TextView>(R.id.text_username)
+        val password = findViewById<TextView>(R.id.text_password)
         btnLogin.setOnClickListener {
-            val intent = Intent(this, IncomeAndExpense::class.java)
-            finish()
-            startActivity(intent)
+            val username = username.text.toString().trim()
+            val password = password.text.toString().trim()
+
+            FirebaseDatabase.getInstance().getReference("Users/$username/")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.exists()) {
+                            val hash = snapshot.child("password").value.toString()
+                            val result = BCrypt.verifyer().verify(password.toCharArray(), hash)
+                            if(result.verified) {
+                                startActivity(Intent(this@MainActivity, IncomeAndExpense::class.java))
+                                finish()
+                            }else {
+                                Toast.makeText(baseContext, "Sorry, password is wrong!", Toast.LENGTH_SHORT).show()
+                            }
+                        }else {
+                            Toast.makeText(baseContext, "Sorry, username not Found!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+
+
         }
     }
 
