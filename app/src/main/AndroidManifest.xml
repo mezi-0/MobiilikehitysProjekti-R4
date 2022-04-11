@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SBudget">
 
+
         <!-- Launcher activity -->
         <activity
             android:name=".MainActivity"
