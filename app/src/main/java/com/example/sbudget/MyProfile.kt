@@ -23,6 +23,11 @@ class MyProfile : AppCompatActivity() {
                     finish()
                     startActivity(intent)
                 }
+                R.id.ic_money -> {
+                    val intent = Intent(this, Premium::class.java)
+                    finish()
+                    startActivity(intent)
+                }
             }
             true
         }

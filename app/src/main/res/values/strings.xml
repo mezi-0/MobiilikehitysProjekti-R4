@@ -7,7 +7,7 @@
     <string name="my_profile_title"><u>Account Information</u></string>
     <string name="subscription_title"><u>Own subscription</u></string>
     <string name="change_password_title"><u>Change Password</u></string>
-
+    <string name="premium_title"><u>Premium</u></string>
     <!-- Others underlines-->
     <string name="reset_password_underline"><u>Reset password</u></string>
 </resources>

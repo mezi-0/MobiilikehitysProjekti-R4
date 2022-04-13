@@ -38,6 +38,15 @@
         <activity
             android:name=".ChangePassword"
             android:exported="false" />
+        <activity
+            android:name=".Premium"
+            android:exported="false" />
+        <activity
+            android:name=".Memberships"
+            android:exported="false" />
+        <activity
+            android:name=".MyBudget"
+            android:exported="false" />
         <activity android:name=".ManageSubscription" />
     </application>
 
