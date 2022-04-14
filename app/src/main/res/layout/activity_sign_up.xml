@@ -28,67 +28,40 @@
         tools:layout_editor_absoluteY="0dp" />
     <!--Background image and that's darkening-->
 
-    <EditText
-        android:id="@+id/editTxtFname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="First name"
-        android:inputType="textPersonName"
-        android:background="@color/white"
-        android:textAlignment="center"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtLname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTxtLname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Last name"
-        android:inputType="textPersonName"
-        android:background="@color/white"
-        android:textAlignment="center"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtUname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtFname" />
 
     <EditText
         android:id="@+id/editTxtUname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginTop="80dp"
+        android:ems="13"
         android:hint="Username"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
         android:inputType="textPersonName"
-        android:background="@color/white"
         android:textAlignment="center"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtLname" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:backgroundTint="@color/white"
+        android:ems="13"
         android:hint="Password"
         android:inputType="textPassword"
-        android:background="@color/white"
-        android:textAlignment="center"
         android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtUname" />
 
@@ -96,63 +69,64 @@
         android:id="@+id/editTextPassword2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:ems="13"
         android:hint="Repeat password"
         android:inputType="textPassword"
-        android:background="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
         android:textAlignment="center"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtPhone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
-    <EditText
-        android:id="@+id/editTxtPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Phone number"
-        android:inputType="textPersonName"
-        android:background="@color/white"
-        android:textAlignment="center"
+        android:textSize="24sp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/editTxtAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
 
     <EditText
         android:id="@+id/editTxtAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:ems="13"
         android:hint="Email"
         android:inputType="textPersonName"
-        android:background="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
         android:textAlignment="center"
+        android:textSize="24sp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword2" />
 
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="Sign up"
-        android:backgroundTint="#318CCD"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:textColor="@color/black"
-        android:textSize="16dp"
-        app:cornerRadius="25dp"
+        android:backgroundTint="@drawable/button_design"
+        android:text="Create"
+        android:textSize="24sp"
+        app:cornerRadius="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtAddress" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

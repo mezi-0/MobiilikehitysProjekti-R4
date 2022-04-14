@@ -3,14 +3,19 @@ package com.example.sbudget
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import at.favre.lib.crypto.bcrypt.BCrypt
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -24,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.actionbar_color_gradient))
         setContentView(R.layout.activity_main)
 
 
@@ -42,13 +48,47 @@ class MainActivity : AppCompatActivity() {
 
 
         val btnLogin = findViewById<Button>(R.id.button_login)
-        val username = findViewById<TextView>(R.id.text_username)
+        val email = findViewById<TextView>(R.id.text_email)
         val password = findViewById<TextView>(R.id.text_password)
-        btnLogin.setOnClickListener {
-            val username = username.text.toString().trim()
-            val password = password.text.toString().trim()
 
-            FirebaseDatabase.getInstance().getReference("Users/$username/")
+        btnLogin.setOnClickListener {
+            val email: String = email.text.toString().trim()
+            val password: String = password.text.toString().trim()
+            if(email.isEmpty() && password.isEmpty()) {
+                Toast.makeText(baseContext, "Field must be fill", Toast.LENGTH_SHORT).show()
+            } else {
+                Firebase.auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task: Task<AuthResult> ->
+                        if (task.isSuccessful) {
+
+                            startActivity(Intent(this@MainActivity, IncomeAndExpense::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                baseContext,
+                                "Failed to login! Please check your credentials",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+            }
+
+
+
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+            /*FirebaseDatabase.getInstance().getReference("Users/$username/")
                 .addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
@@ -68,10 +108,4 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(baseContext, "Sorry, username not Found!", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
-
-
-        }
-    }
-
-}
+                })*/

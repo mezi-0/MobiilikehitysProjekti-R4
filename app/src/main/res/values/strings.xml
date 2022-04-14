@@ -8,6 +8,7 @@
     <string name="subscription_title"><u>Own subscription</u></string>
     <string name="change_password_title"><u>Change Password</u></string>
 
+
     <!-- Others underlines-->
     <string name="reset_password_underline"><u>Reset password</u></string>
 </resources>
