@@ -52,14 +52,9 @@ class MyProfile : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-        val user : FirebaseUser
-        val reference : DatabaseReference
-        val userID : String
-
-        user = FirebaseAuth.getInstance().currentUser!!
-        reference = FirebaseDatabase.getInstance().getReference("Users")
-        userID = user.uid
+        val user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+        val reference : DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+        val userID : String = user.uid
 
         val usernameText = findViewById<TextView>(R.id.usernameTextDB)
         val emailText = findViewById<TextView>(R.id.emailTextDB)
