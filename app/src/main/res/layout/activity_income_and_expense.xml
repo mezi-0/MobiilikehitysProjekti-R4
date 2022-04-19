@@ -28,7 +28,7 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        tools:layout_editor_absoluteY="0dp" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -61,12 +61,11 @@
 
     <LinearLayout
         android:id="@+id/tulotMenotLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="225sp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
 
         app:layout_constraintBottom_toTopOf="@+id/tulotMenotLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/tulotMenotInfo"
         app:layout_constraintStart_toStartOf="@+id/tulotMenotInfo"
         app:layout_constraintTop_toBottomOf="@+id/tulotMenotInfo"
         tools:ignore="MissingConstraints">
@@ -75,54 +74,87 @@
             android:id="@+id/tulotMenotText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tulot/menot info 1"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tulotMenotText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tulot/menot info 2"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tulotMenotText3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tulot/menot info 3"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tulotMenotText4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tulot/menot info 4"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tulotMenotText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tulotMenotText6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/tulotMenotButton"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="@+id/tulotMenotLayout1"
+        app:layout_constraintEnd_toEndOf="@+id/tulotMenotInfo"
+        app:layout_constraintTop_toTopOf="@+id/tulotMenotLayout1"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/addTulotMenotBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/button_design"
+            android:text="+"
+            android:textColor="@color/black"
+            android:textSize="65sp"
+            app:cornerRadius="150dp"
+            app:layout_constraintBottom_toTopOf="@+id/changePasswordBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/tulotMenotLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:layout_marginVertical="25dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="10sp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tulotMenotLayout1"
         tools:ignore="MissingConstraints">
 
         <com.github.mikephil.charting.charts.BarChart

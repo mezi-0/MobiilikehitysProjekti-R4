@@ -79,33 +79,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-            /*FirebaseDatabase.getInstance().getReference("Users/$username/")
-                .addListenerForSingleValueEvent(object : ValueEventListener{
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if(snapshot.exists()) {
-                            val hash = snapshot.child("password").value.toString()
-                            val result = BCrypt.verifyer().verify(password.toCharArray(), hash)
-                            if(result.verified) {
-                                startActivity(Intent(this@MainActivity, IncomeAndExpense::class.java))
-                                finish()
-                            }else {
-                                Toast.makeText(baseContext, "Sorry, password is wrong!", Toast.LENGTH_SHORT).show()
-                            }
-                        }else {
-                            Toast.makeText(baseContext, "Sorry, username not Found!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                })*/

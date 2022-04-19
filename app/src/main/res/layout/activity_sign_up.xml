@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:ems="13"
         android:hint="Email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:textColorHint="@color/white"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"

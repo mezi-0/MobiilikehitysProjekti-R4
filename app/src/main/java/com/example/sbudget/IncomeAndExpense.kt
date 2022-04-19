@@ -3,6 +3,7 @@ package com.example.sbudget
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sbudget.databinding.ActivityIncomeAndExpenseBinding
 import com.github.mikephil.charting.charts.BarChart
@@ -37,9 +38,13 @@ class IncomeAndExpense : AppCompatActivity() {
             }
             true
         }
+
+        val addNewIaEBtn =  findViewById<Button>(R.id.addTulotMenotBtn)
+        addNewIaEBtn.setOnClickListener {
+            val intent = Intent(this, IncomeAndExpense_AddNew::class.java)
+            startActivity(intent)
+        }
     }
-
-
 
     private fun chartCreating() {
 

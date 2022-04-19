@@ -1,0 +1,90 @@
+package com.example.sbudget
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.*
+import androidx.room.Room
+import com.example.sbudget.data.IaE
+import com.example.sbudget.data.IaE_DAO
+import com.example.sbudget.data.IaE_DATABASE
+
+class IncomeAndExpense_AddNew : AppCompatActivity() {
+
+    // Spinner variable
+    lateinit var spinner : Spinner
+    lateinit var db: IaE_DATABASE
+    lateinit var iaeDao : IaE_DAO
+    lateinit var spinnerTypeResult: String
+    lateinit var textViewOut: TextView
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_income_and_expense_add_new)
+
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Spinner implementation
+        spinner = findViewById(R.id.type_selector)
+        var title: TextView = findViewById(R.id.title)
+        var cost: TextView = findViewById(R.id.cost)
+        var createBtn: Button = findViewById(R.id.addNew)
+        textViewOut = findViewById(R.id.textOutput)
+
+
+        // Initializing database
+        db = Room.databaseBuilder(
+            applicationContext,
+            IaE_DATABASE::class.java, "IaE_DB"
+        ).allowMainThreadQueries().build()
+
+        // Initializing DAO
+        iaeDao = db.iae_dao()
+
+        val types = arrayOf("Income", "Expense")
+        val arrayAdapter = ArrayAdapter(this, R.layout.spinner_list, types)
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_list)
+        spinner.adapter = arrayAdapter
+
+        spinner.onItemSelectedListener = object :
+        AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                spinnerTypeResult = types[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+        createBtn.setOnClickListener() {
+            iaeDao.addIaE(IaE(0, title.text.toString(), cost.text.toString(), spinnerTypeResult))
+            //updateDBView()
+        }
+
+
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    /*
+    private fun updateDBView() {
+        var dbText: String = ""
+        iaeDao.readSixLasts().forEach() {
+            dbText += "${it.type}" + "${it.title}" + "${it.cost}"
+        }
+        textViewOut.text = dbText
+    }
+     */
+}

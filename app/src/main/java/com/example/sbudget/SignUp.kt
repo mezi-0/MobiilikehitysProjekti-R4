@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -49,18 +50,21 @@ class SignUp : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "Field must be fill!", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            }else if(password != passwordR) {
+            } else if(password.length < 6){
+                Toast.makeText(this, "Min password lenght should be 6 characters!", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE
+            } else if(password != passwordR) {
                 Toast.makeText(this, "Password not match", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            }else{
-
-                // val passHash = BCrypt.withDefaults().hashToString(12, password.toCharArray())
-                val data = UserData(userName, email, "0")
+            } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(this, "Password not match", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE
+            } else{
+                val data = UserData(userName, email, "Not member")
                 Firebase.auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener{ task: Task<AuthResult> ->
                         if(task.isSuccessful){
                             //Registration OK
-                            // FirebaseDatabase.getInstance().getReference("Users/$userName/").setValue(data)
                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().uid.toString()).setValue(data)
                                 .addOnSuccessListener {
                                     Toast.makeText(baseContext, "Account created!", Toast.LENGTH_SHORT).show()
@@ -70,11 +74,11 @@ class SignUp : AppCompatActivity() {
                                 }
                                 .addOnFailureListener {
                                     progressBar.visibility = View.INVISIBLE
-                                    Toast.makeText(baseContext, "Something wrong with database, please try again later or contact with us (@someemail)", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(baseContext, "Something wrong with database, please try again later", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
                             //Registration error
-                            Toast.makeText(baseContext, "Something wrong, try again later or change email", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, "Email already exists", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.INVISIBLE
                         }
                     }

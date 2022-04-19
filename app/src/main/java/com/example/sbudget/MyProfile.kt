@@ -27,11 +27,18 @@ class MyProfile : AppCompatActivity() {
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        
+
         binding.bNav.selectedItemId = R.id.ic_person
         binding.bNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.ic_graph -> {
                     val intent = Intent(this, IncomeAndExpense::class.java)
+                    finish()
+                    startActivity(intent)
+                }
+                R.id.ic_money -> {
+                    val intent = Intent(this, Premium::class.java)
                     finish()
                     startActivity(intent)
                 }

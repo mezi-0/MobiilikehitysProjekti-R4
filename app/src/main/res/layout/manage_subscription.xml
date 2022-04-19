@@ -50,8 +50,8 @@
 
     <!--Left table-->
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="150dp"
+        android:id="@+id/linearLayoutLeft"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:shape = "rectangle"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Status"
-            android:textSize="20sp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -77,18 +77,53 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Duration"
-            android:textSize="20sp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
     </LinearLayout>
     <!--Left table-->
 
+    <LinearLayout
+        android:id="@+id/linearLayoutCenter"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:shape = "rectangle"
+        android:radius = "15dp"
+        app:layout_constraintBottom_toTopOf="@+id/premiumJoinBtn"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutLeft"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutRight"
+        app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/statusC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text=":"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
+            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+        <TextView
+            android:id="@+id/durationC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text=":"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
+            app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
+
+    </LinearLayout>
+
 
 
     <!--Right table-->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayoutRight"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/premiumJoinBtn"
@@ -101,8 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Status from db"
-            android:textSize="20sp"
+            android:text="Status"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -111,8 +146,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Duration from db"
-            android:textSize="20sp"
+            android:text="Duration"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
     </LinearLayout>
@@ -125,10 +160,9 @@
         android:id="@+id/premiumCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(€)"
+        android:text="0.99 € / month"
         android:textColor="@color/white"
         android:textSize="20sp"
-
         app:layout_constraintEnd_toEndOf="@+id/premiumJoinBtn"
         app:layout_constraintStart_toStartOf="@+id/premiumJoinBtn"
         app:layout_constraintTop_toBottomOf="@+id/premiumJoinBtn" />
@@ -140,14 +174,14 @@
     <Button
         android:id="@+id/premiumJoinBtn"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="88dp"
-        android:backgroundTint="#318CCD"
+        android:backgroundTint="@drawable/button_design"
         android:textColor="@color/black"
-        app:cornerRadius="25dp"
+        app:cornerRadius="150dp"
         android:ellipsize="middle"
-        android:text="Join premium"
         android:textSize="16sp"
+        android:text="Join premium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
