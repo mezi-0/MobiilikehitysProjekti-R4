@@ -10,6 +10,6 @@ interface IaE_DAO {
     fun addIaE(data : IaE)
 
 
-    @Query("SELECT * FROM iae_table ORDER BY id DESC LIMIT :from, :to")
-    fun readSixLasts(from: Int, to: Int): List<IaE>
+    @Query("SELECT * FROM iae_table ORDER BY id DESC LIMIT 6")
+    fun readSixLasts(): List<IaE>
 }

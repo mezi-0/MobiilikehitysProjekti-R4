@@ -67,14 +67,24 @@ class MyProfile : AppCompatActivity() {
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val userName = snapshot.child("userName").getValue(String::class.java).toString()
-                val email = snapshot.child("email").getValue(String::class.java).toString()
-                val level = snapshot.child("level").getValue(String::class.java).toString()
+                var userName = snapshot.child("userName").getValue(String::class.java).toString()
+                var email = snapshot.child("email").getValue(String::class.java).toString()
+                var level = snapshot.child("level").getValue(String::class.java).toString()
 
                 if(snapshot!!.exists()) {
-                    usernameText.setText(userName)
-                    emailText.setText(email)
+
+                    usernameText.setOnClickListener {
+                        Toast.makeText(baseContext, userName, Toast.LENGTH_SHORT).show()
+                    }
+                    emailText.setOnClickListener {
+                        Toast.makeText(baseContext, email, Toast.LENGTH_SHORT).show()
+                    }
+                    
+                    usernameText.setText(userName.substring(0,15) + "...")
+                    emailText.setText(email.substring(0,15) + "...")
                     levelText.setText(level)
+
+
 
                 }
 

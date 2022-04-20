@@ -1,10 +1,11 @@
 package com.example.sbudget
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.sbudget.data.IaE
 import com.example.sbudget.data.IaE_DAO
@@ -61,8 +62,17 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         }
 
         createBtn.setOnClickListener() {
-            iaeDao.addIaE(IaE(0, title.text.toString(), cost.text.toString(), spinnerTypeResult))
-            //updateDBView()
+            if(spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
+                var costE: Double = cost.text.toString().toDouble()
+                costE *= -1
+                iaeDao.addIaE(IaE(0, title.text.toString(), costE.toString(), spinnerTypeResult))
+            } else if(spinnerTypeResult == "Income" && spinnerTypeResult != "Expense") {
+                var costI: Double = cost.text.toString().toDouble()
+                iaeDao.addIaE(IaE(0, title.text.toString(), costI.toString(), spinnerTypeResult))
+            }
+            val intent = Intent(this, IncomeAndExpense::class.java)
+            finish()
+            startActivity(intent)
         }
 
 
@@ -72,13 +82,14 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                val intent = Intent(this, IncomeAndExpense::class.java)
                 finish()
-                return true
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
     }
-    /*
+
     private fun updateDBView() {
         var dbText: String = ""
         iaeDao.readSixLasts().forEach() {
@@ -86,5 +97,5 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         }
         textViewOut.text = dbText
     }
-     */
+
 }
