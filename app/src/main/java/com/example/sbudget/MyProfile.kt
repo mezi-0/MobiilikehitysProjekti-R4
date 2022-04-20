@@ -79,11 +79,18 @@ class MyProfile : AppCompatActivity() {
                     emailText.setOnClickListener {
                         Toast.makeText(baseContext, email, Toast.LENGTH_SHORT).show()
                     }
-                    
-                    usernameText.setText(userName.substring(0,15) + "...")
-                    emailText.setText(email.substring(0,15) + "...")
-                    levelText.setText(level)
 
+                    if(userName.length > 15) {
+                        usernameText.setText(userName.substring(0, 15) + "...")
+                    } else if (userName.length <= 15) {
+                        usernameText.setText(userName)
+                    }
+                    if(email.length > 15) {
+                        emailText.setText(email.substring(0, 15) + "...")
+                    } else if(email.length <= 15) {
+                        emailText.setText(email)
+                    }
+                        levelText.setText(level)
 
 
                 }

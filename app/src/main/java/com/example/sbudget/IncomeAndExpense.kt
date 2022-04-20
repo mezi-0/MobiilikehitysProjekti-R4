@@ -27,6 +27,7 @@ class IncomeAndExpense : AppCompatActivity() {
     lateinit var iaeDao : IaE_DAO
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIncomeAndExpenseBinding.inflate(layoutInflater)
@@ -60,7 +61,6 @@ class IncomeAndExpense : AppCompatActivity() {
         }
 
 
-
         val text0: TextView = findViewById(R.id.tulotMenotText1)
         val text1: TextView = findViewById(R.id.tulotMenotText2)
         val text2: TextView = findViewById(R.id.tulotMenotText3)
@@ -76,7 +76,6 @@ class IncomeAndExpense : AppCompatActivity() {
             text4,
             text5
         )
-        Log.d("kekis", textArray[0].text.toString())
         var str: String = ""
         val delim = ":"
 
@@ -86,7 +85,6 @@ class IncomeAndExpense : AppCompatActivity() {
 
         val strArray = str.split(delim).toTypedArray()
 
-        Log.d("kekis", strArray[0])
         if(strArray[0].isEmpty()) {
 
         } else {
@@ -105,7 +103,6 @@ class IncomeAndExpense : AppCompatActivity() {
         var amount: String = ""
         val delim = ":"
 
-        Log.d("kekis", "Test")
         iaeDao.readSixLasts().forEach() {
             amount += "${it.cost}:"
         }
@@ -123,13 +120,11 @@ class IncomeAndExpense : AppCompatActivity() {
         // List settings
         barDataSet = BarDataSet(barList, "IncomeAndExpense Diagram")
 
-
         barData = BarData(barDataSet)
         //barDataSet.setColors(Color.parseColor("#304567"))
 
         barDataSet.setColors(Color.parseColor("#304567"))
         barChart.data = barData
-
         barChart.invalidate()
         barChart.setBackgroundColor(Color.rgb(255,255,255))
 
@@ -145,28 +140,5 @@ class IncomeAndExpense : AppCompatActivity() {
         barDataSet.valueTextSize = 16f
 
     }
-
-
-    // Toolbar
-    /*
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id = item.itemId
-
-        if(id == R.id.ic_person) {
-
-            val intent = Intent (this, MyProfile::class.java)
-            finish()
-            startActivity(intent)
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-*/
 }
 
