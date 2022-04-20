@@ -16,6 +16,8 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class IncomeAndExpense : AppCompatActivity() {
@@ -26,22 +28,25 @@ class IncomeAndExpense : AppCompatActivity() {
     lateinit var db: IaE_DATABASE
     lateinit var iaeDao : IaE_DAO
 
+    // Get userId from firebase. For each user different data from SQLite by userId
+    var user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+    var userId: String = user.uid
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIncomeAndExpenseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         // Initializing database
         db = Room.databaseBuilder(
             applicationContext,
             IaE_DATABASE::class.java, "IaE_DB"
         ).allowMainThreadQueries().build()
-
         // Initializing DAO
         iaeDao = db.iae_dao()
 
-
+        // Bottom nav menu
         binding.bNav.selectedItemId = R.id.ic_graph
         binding.bNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -54,13 +59,14 @@ class IncomeAndExpense : AppCompatActivity() {
             true
         }
 
+        // Button open new activity for adding new IaE
         val addNewIaEBtn =  findViewById<Button>(R.id.addTulotMenotBtn)
         addNewIaEBtn.setOnClickListener {
             val intent = Intent(this, IncomeAndExpense_AddNew::class.java)
             startActivity(intent)
         }
 
-
+        // Layout TextView:s initialization
         val text0: TextView = findViewById(R.id.tulotMenotText1)
         val text1: TextView = findViewById(R.id.tulotMenotText2)
         val text2: TextView = findViewById(R.id.tulotMenotText3)
@@ -68,6 +74,7 @@ class IncomeAndExpense : AppCompatActivity() {
         val text4: TextView = findViewById(R.id.tulotMenotText5)
         val text5: TextView = findViewById(R.id.tulotMenotText6)
 
+        // Creating Array for all TextView elements for easier using
         val textArray = arrayListOf<TextView>(
             text0,
             text1,
@@ -76,24 +83,24 @@ class IncomeAndExpense : AppCompatActivity() {
             text4,
             text5
         )
+
+        // Get lasts six data from SQLite and adding it to one String. Then use delimitter, for creating Array<>
         var str: String = ""
         val delim = ":"
-
-        iaeDao.readSixLasts().forEach() {
+        iaeDao.readSixLasts(userId).forEach() {
             str += "${it.type}, " + "${it.title}, " + "${it.cost} €:"
         }
-
         val strArray = str.split(delim).toTypedArray()
 
+        // If Array is empty - get FATAL error and app close, but with this if() statement app stays opened
         if(strArray[0].isEmpty()) {
-
+            // Nothing to do
         } else {
+            // Add elements in TextView Array, if data from SQLite not empty
             for (i in 0 until strArray.size - 1) {
                 textArray[i].text = strArray[i]
             }
-
             chartCreating()
-
         }
     }
 
@@ -102,8 +109,7 @@ class IncomeAndExpense : AppCompatActivity() {
         val barChart = findViewById<BarChart>(R.id.barChart)
         var amount: String = ""
         val delim = ":"
-
-        iaeDao.readSixLasts().forEach() {
+        iaeDao.readSixLasts(userId).forEach() {
             amount += "${it.cost}:"
         }
 
@@ -117,11 +123,10 @@ class IncomeAndExpense : AppCompatActivity() {
         }
 
 
+
         // List settings
         barDataSet = BarDataSet(barList, "IncomeAndExpense Diagram")
-
         barData = BarData(barDataSet)
-        //barDataSet.setColors(Color.parseColor("#304567"))
 
         barDataSet.setColors(Color.parseColor("#304567"))
         barChart.data = barData

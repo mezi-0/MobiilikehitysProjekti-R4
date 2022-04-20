@@ -2,6 +2,7 @@ package com.example.sbudget
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -10,6 +11,12 @@ import androidx.room.Room
 import com.example.sbudget.data.IaE
 import com.example.sbudget.data.IaE_DAO
 import com.example.sbudget.data.IaE_DATABASE
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class IncomeAndExpense_AddNew : AppCompatActivity() {
 
@@ -19,6 +26,8 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
     lateinit var iaeDao : IaE_DAO
     lateinit var spinnerTypeResult: String
     lateinit var textViewOut: TextView
+    lateinit var user: FirebaseUser
+    lateinit var userId: String
 
 
 
@@ -48,6 +57,9 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
 
         val types = arrayOf("Income", "Expense")
         val arrayAdapter = ArrayAdapter(this, R.layout.spinner_list, types)
+
+
+
         arrayAdapter.setDropDownViewResource(R.layout.spinner_list)
         spinner.adapter = arrayAdapter
 
@@ -62,17 +74,40 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         }
 
         createBtn.setOnClickListener() {
-            if(spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
-                var costE: Double = cost.text.toString().toDouble()
-                costE *= -1
-                iaeDao.addIaE(IaE(0, title.text.toString(), costE.toString(), spinnerTypeResult))
-            } else if(spinnerTypeResult == "Income" && spinnerTypeResult != "Expense") {
-                var costI: Double = cost.text.toString().toDouble()
-                iaeDao.addIaE(IaE(0, title.text.toString(), costI.toString(), spinnerTypeResult))
+
+            user = FirebaseAuth.getInstance().currentUser!!
+            userId = user.uid
+
+            if (userId != null) {
+                if (spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
+                    var costE: Double = cost.text.toString().toDouble()
+                    costE *= -1
+                    iaeDao.addIaE(
+                        IaE(
+                            0,
+                            userId,
+                            title.text.toString(),
+                            costE.toString(),
+                            spinnerTypeResult
+                        )
+                    )
+                } else if (spinnerTypeResult == "Income" && spinnerTypeResult != "Expense") {
+                    var costI: Double = cost.text.toString().toDouble()
+                    iaeDao.addIaE(
+                        IaE(
+                            0,
+                            userId,
+                            title.text.toString(),
+                            costI.toString(),
+                            spinnerTypeResult
+                        )
+                    )
+                }
+                val intent = Intent(this, IncomeAndExpense::class.java)
+                finish()
+                startActivity(intent)
             }
-            val intent = Intent(this, IncomeAndExpense::class.java)
-            finish()
-            startActivity(intent)
+
         }
 
 
@@ -90,6 +125,7 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    /*
     private fun updateDBView() {
         var dbText: String = ""
         iaeDao.readSixLasts().forEach() {
@@ -97,5 +133,7 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         }
         textViewOut.text = dbText
     }
+
+     */
 
 }
