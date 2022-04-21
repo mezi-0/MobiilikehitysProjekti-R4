@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         txtBtnReset.setOnClickListener{
             val intent = Intent(this, ResetPassword::class.java)
             startActivity(intent)
+            finish()
         }
 
 
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         btnSignUp.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
+            finish()
         }
 
 
@@ -54,13 +56,12 @@ class MainActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val email: String = email.text.toString().trim()
             val password: String = password.text.toString().trim()
-            if(email.isEmpty() && password.isEmpty()) {
+            if(email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(baseContext, "Field must be fill", Toast.LENGTH_SHORT).show()
             } else {
                 Firebase.auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task: Task<AuthResult> ->
                         if (task.isSuccessful) {
-
                             startActivity(Intent(this@MainActivity, IncomeAndExpense::class.java))
                             finish()
                         } else {

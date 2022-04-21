@@ -7,6 +7,7 @@ data class IaE(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val userId: String,
+    val category: String,
     val title: String,
     val cost: String,
     val type: String

@@ -4,17 +4,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.example.sbudget.databinding.ActivityPremiumBinding
+import com.google.android.material.tabs.TabLayout
 
 class Premium : AppCompatActivity() {
 
     lateinit var binding: ActivityPremiumBinding
+    private lateinit var pager: ViewPager
+    private lateinit var tab: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPremiumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        pager = findViewById(R.id.viewPager)
+        tab = findViewById(R.id.tabs)
+
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(MyBudget(), "My Budget")
+        adapter.addFragment(Memberships(), "My Memberships")
+        pager.adapter = adapter
+        tab.setupWithViewPager(pager)
 
 
         binding.bNav.selectedItemId = R.id.ic_money
@@ -32,18 +44,6 @@ class Premium : AppCompatActivity() {
                 }
             }
             true
-        }
-        val manageSubscriptionBtn =  findViewById<Button>(R.id.myBudgetBtn)
-        manageSubscriptionBtn.setOnClickListener {
-            val intent = Intent(this, MyBudget::class.java)
-            startActivity(intent)
-
-        }
-
-        val changePasswordBtn = findViewById<Button>(R.id.membershipsBtn)
-        changePasswordBtn.setOnClickListener {
-            val intent = Intent(this, Memberships::class.java)
-            startActivity(intent)
         }
     }
 }

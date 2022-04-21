@@ -1,5 +1,6 @@
 package com.example.sbudget
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -60,8 +61,9 @@ class ResetPassword : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 finish()
-                return true
             }
         }
         return super.onOptionsItemSelected(item)

@@ -16,7 +16,7 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        tools:layout_editor_absoluteY="0dp" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -34,32 +34,15 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:ems="11"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/white"
+        android:ems="12"
         android:hint="Title"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/white"
         android:inputType="text"
         android:textAlignment="center"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textOutput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="11"
-        android:hint="TextOutput"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/white"
         android:textColor="@color/white"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textSize="26sp"
+        android:textColorHint="@color/white"
+        android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,14 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:ems="11"
+        android:ems="12"
         android:hint="Cost / Get"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textSize="26sp"
+        android:textSize="27sp"
         app:layout_constraintBottom_toTopOf="@+id/type_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,17 +68,27 @@
 
 
     <Spinner
+        style="@style/SpinnerTheme"
         android:id="@+id/type_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
-        android:backgroundTint="@color/white"
-        android:popupBackground="#2B2B2B"
+        android:minWidth="24dp"
+        android:minHeight="24dp"
         app:layout_constraintBottom_toTopOf="@+id/addNew"
-        app:layout_constraintEnd_toEndOf="@+id/addNew"
-        app:layout_constraintStart_toStartOf="@+id/addNew"
+        app:layout_constraintStart_toStartOf="@+id/cost"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        style="@style/SpinnerTheme"
+        android:id="@+id/category_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="24dp"
+        android:minHeight="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/addNew"
+        app:layout_constraintEnd_toEndOf="@+id/cost"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:ignore="MissingConstraints" />
 
 
@@ -104,9 +97,9 @@
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_marginBottom="150dp"
-        android:textColor="@color/black"
         android:backgroundTint="@drawable/button_design"
         android:text="Add new"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:cornerRadius="150dp"
         app:layout_constraintBottom_toBottomOf="parent"

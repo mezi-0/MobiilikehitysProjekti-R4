@@ -1,50 +1,163 @@
 package com.example.sbudget
 
-import android.content.Intent
+
+import android.graphics.Color
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import com.example.sbudget.databinding.ActivityMyBudgetBinding
-import com.example.sbudget.databinding.ActivityPremiumBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.room.Room
+import com.example.sbudget.data.IaE_DAO
+import com.example.sbudget.data.IaE_DATABASE
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
-class MyBudget :AppCompatActivity() {
-    lateinit var binding: ActivityMyBudgetBinding
+class MyBudget : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMyBudgetBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    lateinit var piechart: PieChart
+    lateinit var db: IaE_DATABASE
+    lateinit var iaeDao: IaE_DAO
+    lateinit var pieDataSet: PieDataSet
+    lateinit var pieData: PieData
+    var user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+    var userId: String = user.uid
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(R.layout.activity_my_budget, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        piechart = view.findViewById(R.id.myBudget_piechart)
+        db = Room.databaseBuilder(
+            requireContext(),
+            IaE_DATABASE::class.java, "IaE_DB"
+        ).allowMainThreadQueries().build()
+        // Initializing DAO
+        iaeDao = db.iae_dao()
+        setupPieChartData()
+        loadPieChartData()
+    }
+
+    fun setupPieChartData() {
+        piechart.isDrawHoleEnabled = true
+        piechart.setUsePercentValues(true)
+        piechart.setEntryLabelTextSize(13f)
+        piechart.setEntryLabelColor(Color.BLACK)
+        piechart.centerText = "Expense by Categories"
+        piechart.setCenterTextSize(26f)
+        piechart.description.isEnabled = false
+    }
+
+    fun loadPieChartData() {
+
+        var amount: String = ""
+        var category: String = ""
+        val delim = ":"
+        iaeDao.readSixLasts(userId).forEach() {
+            if (it.cost.toFloat() < 0) {
+                amount += "${it.cost}:"
+                category += "${it.category}:"
+            }
+        }
+
+        val amountArray = amount.split(delim).toTypedArray()
+        val categoryArray = category.split(delim).toTypedArray()
+        val chartList: ArrayList<PieEntry> = ArrayList()
 
 
+        // Categories
+        var foodAndDining: Float = 0f
+        var medical: Float = 0f
+        var housing: Float = 0f
+        var entertainment: Float = 0f
+        var another: Float = 0f
+        var withOutCategory: Float = 0f
 
-        binding.bNav.selectedItemId = R.id.ic_money
-        binding.bNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.ic_person -> {
-                    val intent = Intent(this, MyProfile::class.java)
-                    finish()
-                    startActivity(intent)
+        if(amountArray[0].isEmpty()) {
+        } else {
+        for (i in 0 until amountArray.size - 1) {
+            when {
+                categoryArray[i] == "Food & Dining" -> {
+                    foodAndDining += amountArray[i].toFloat()
                 }
-                R.id.ic_graph -> {
-                    val intent = Intent(this, IncomeAndExpense::class.java)
-                    finish()
-                    startActivity(intent)
+                categoryArray[i] == "Medical" -> {
+                    medical += amountArray[i].toFloat()
+                }
+                categoryArray[i] == "Housing" -> {
+                    housing += amountArray[i].toFloat()
+                }
+                categoryArray[i] == "Entertainment" -> {
+                    entertainment += amountArray[i].toFloat()
+                }
+                categoryArray[i] == "Another" -> {
+                    another += amountArray[i].toFloat()
+                }
+                else -> {
+                    withOutCategory += amountArray[i].toFloat()
                 }
             }
-            true
-        }
-        val historyMapBtn = findViewById<Button>(R.id.historyMapBtn)
-        historyMapBtn.setOnClickListener {
-            val intent = Intent(this, Premium::class.java)
-            startActivity(intent)
-
         }
 
-        val membershipsBtn = findViewById<Button>(R.id.membershipsBtn)
-        membershipsBtn.setOnClickListener {
-            val intent = Intent(this, Memberships::class.java)
-            startActivity(intent)
+        if (foodAndDining < 0) {
+            foodAndDining *= (-1)
+            chartList.add(PieEntry(foodAndDining, "Food & Dining"))
         }
+        if (medical < 0) {
+            medical *= (-1)
+            chartList.add(PieEntry(medical, "Medical"))
+        }
+        if (housing < 0) {
+            housing *= (-1)
+            chartList.add(PieEntry(housing, "Housing"))
+        }
+        if (entertainment < 0) {
+            entertainment *= (-1)
+            chartList.add(PieEntry(entertainment, "Entertainment"))
+        }
+        if (another < 0) {
+            another *= (-1)
+            chartList.add(PieEntry(another, "Another"))
+        }
+        if (withOutCategory < 0) {
+            withOutCategory *= (-1)
+            chartList.add(PieEntry(withOutCategory, "Without category"))
+        }
+
+
+        val colors = ArrayList<Int>()
+        for (color in ColorTemplate.MATERIAL_COLORS) {
+            colors.add(color)
+        }
+        for (color in ColorTemplate.VORDIPLOM_COLORS) {
+            colors.add(color)
+        }
+
+
+        pieDataSet = PieDataSet(chartList, "Expense Category")
+
+        pieDataSet.colors = colors
+
+        pieData = PieData(pieDataSet)
+
+        pieData.setDrawValues(true)
+        pieData.setValueFormatter(PercentFormatter(piechart))
+        pieData.setValueTextSize(18f)
+
+        pieData.setValueTextColor(Color.BLACK)
+        piechart.data = pieData
+        piechart.invalidate()
     }
+    }
+
 }

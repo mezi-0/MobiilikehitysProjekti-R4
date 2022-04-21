@@ -90,8 +90,9 @@ class SignUp : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 finish()
-                return true
             }
         }
         return super.onOptionsItemSelected(item)

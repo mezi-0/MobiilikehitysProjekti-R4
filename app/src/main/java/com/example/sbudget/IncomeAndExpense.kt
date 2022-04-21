@@ -55,6 +55,11 @@ class IncomeAndExpense : AppCompatActivity() {
                     finish()
                     startActivity(intent)
                 }
+                R.id.ic_money -> {
+                    val intent = Intent(this, Premium::class.java)
+                    finish()
+                    startActivity(intent)
+                }
             }
             true
         }
@@ -64,6 +69,7 @@ class IncomeAndExpense : AppCompatActivity() {
         addNewIaEBtn.setOnClickListener {
             val intent = Intent(this, IncomeAndExpense_AddNew::class.java)
             startActivity(intent)
+            finish()
         }
 
         // Layout TextView:s initialization
@@ -88,7 +94,7 @@ class IncomeAndExpense : AppCompatActivity() {
         var str: String = ""
         val delim = ":"
         iaeDao.readSixLasts(userId).forEach() {
-            str += "${it.type}, " + "${it.title}, " + "${it.cost} €:"
+            str += "${it.title}, " + "${it.cost} €, " + "${it.category} :"
         }
         val strArray = str.split(delim).toTypedArray()
 
@@ -109,7 +115,7 @@ class IncomeAndExpense : AppCompatActivity() {
         val barChart = findViewById<BarChart>(R.id.barChart)
         var amount: String = ""
         val delim = ":"
-        iaeDao.readSixLasts(userId).forEach() {
+        iaeDao.readTenLasts(userId).forEach() {
             amount += "${it.cost}:"
         }
 
@@ -117,9 +123,7 @@ class IncomeAndExpense : AppCompatActivity() {
         val barList: ArrayList<BarEntry> = ArrayList()
 
         for (i in 0 until amountArray.size-1) {
-            val barEntry = BarEntry(i.toFloat(), amountArray[i].toFloat())
-
-            barList.add(barEntry)
+            barList.add(BarEntry(i.toFloat(), amountArray[i].toFloat()))
         }
 
 

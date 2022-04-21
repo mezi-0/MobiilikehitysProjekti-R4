@@ -8,6 +8,8 @@
     <string name="subscription_title"><u>Own subscription</u></string>
     <string name="change_password_title"><u>Change Password</u></string>
     <string name="premium_title"><u>Premium</u></string>
+    <string name="myBudget_title"><u>My Budget</u></string>
+    <string name="memberships_title"><u>My memberships</u></string>
 
     <!-- Others underlines-->
     <string name="reset_password_underline"><u>Reset password</u></string>

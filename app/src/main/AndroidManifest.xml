@@ -15,12 +15,6 @@
         <activity
             android:name=".Premium"
             android:exported="false" />
-        <activity
-            android:name=".MyBudget"
-            android:exported="false" />
-        <activity
-            android:name=".Memberships"
-            android:exported="false" />
         <!-- Launcher activity -->
         <activity
             android:name=".MainActivity"

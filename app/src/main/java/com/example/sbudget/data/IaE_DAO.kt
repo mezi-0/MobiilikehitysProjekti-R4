@@ -12,4 +12,7 @@ interface IaE_DAO {
 
     @Query("SELECT * FROM iae_table WHERE userId = :userId ORDER BY id DESC LIMIT 6")
     fun readSixLasts(userId : String): List<IaE>
+
+    @Query("SELECT * FROM iae_table WHERE userId = :userId ORDER BY id DESC LIMIT 10")
+    fun readTenLasts(userId : String): List<IaE>
 }

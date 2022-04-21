@@ -21,14 +21,11 @@ import com.google.firebase.ktx.Firebase
 class IncomeAndExpense_AddNew : AppCompatActivity() {
 
     // Spinner variable
-    lateinit var spinner : Spinner
-    lateinit var db: IaE_DATABASE
+    lateinit var spinnerType : Spinner
+    lateinit var db : IaE_DATABASE
     lateinit var iaeDao : IaE_DAO
-    lateinit var spinnerTypeResult: String
-    lateinit var textViewOut: TextView
-    lateinit var user: FirebaseUser
-    lateinit var userId: String
-
+    lateinit var user : FirebaseUser
+    lateinit var userId : String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +36,14 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Spinner implementation
-        spinner = findViewById(R.id.type_selector)
-        var title: TextView = findViewById(R.id.title)
-        var cost: TextView = findViewById(R.id.cost)
+
+        spinnerType = findViewById(R.id.type_selector)
+        var spinnerCategory : Spinner = findViewById(R.id.category_selector)
+        var spinnerTypeResult : String = ""
+        var spinnerTypeResultCategory : String = ""
+        var title: EditText = findViewById(R.id.title)
+        var cost: EditText = findViewById(R.id.cost)
         var createBtn: Button = findViewById(R.id.addNew)
-        textViewOut = findViewById(R.id.textOutput)
 
 
         // Initializing database
@@ -55,15 +55,18 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         // Initializing DAO
         iaeDao = db.iae_dao()
 
-        val types = arrayOf("Income", "Expense")
-        val arrayAdapter = ArrayAdapter(this, R.layout.spinner_list, types)
+        val types = arrayOf("Income","Expense")
+        val categories = arrayOf("Food & Dining", "Medical", "Housing", "Entertainment", "Another")
+        val arrayAdapterType = ArrayAdapter(this, R.layout.spinner_list, types)
+        val arrayAdapterCategory = ArrayAdapter(this, R.layout.spinner_list, categories)
 
 
+        arrayAdapterType.setDropDownViewResource(R.layout.spinner_list)
+        arrayAdapterCategory.setDropDownViewResource(R.layout.spinner_list)
+        spinnerType.adapter = arrayAdapterType
+        spinnerCategory.adapter = arrayAdapterCategory
 
-        arrayAdapter.setDropDownViewResource(R.layout.spinner_list)
-        spinner.adapter = arrayAdapter
-
-        spinner.onItemSelectedListener = object :
+        spinnerType.onItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 spinnerTypeResult = types[p2]
@@ -73,44 +76,66 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
             }
         }
 
-        createBtn.setOnClickListener() {
-
-            user = FirebaseAuth.getInstance().currentUser!!
-            userId = user.uid
-
-            if (userId != null) {
-                if (spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
-                    var costE: Double = cost.text.toString().toDouble()
-                    costE *= -1
-                    iaeDao.addIaE(
-                        IaE(
-                            0,
-                            userId,
-                            title.text.toString(),
-                            costE.toString(),
-                            spinnerTypeResult
-                        )
-                    )
-                } else if (spinnerTypeResult == "Income" && spinnerTypeResult != "Expense") {
-                    var costI: Double = cost.text.toString().toDouble()
-                    iaeDao.addIaE(
-                        IaE(
-                            0,
-                            userId,
-                            title.text.toString(),
-                            costI.toString(),
-                            spinnerTypeResult
-                        )
-                    )
-                }
-                val intent = Intent(this, IncomeAndExpense::class.java)
-                finish()
-                startActivity(intent)
+        spinnerCategory.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                spinnerTypeResultCategory = categories[p2]
             }
 
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                spinnerTypeResultCategory = "No category"
+            }
         }
 
+            createBtn.setOnClickListener() {
 
+                if (title.text.isEmpty() || cost.text.isEmpty()) {
+                    Toast.makeText(baseContext, "Field must be fill", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    user = FirebaseAuth.getInstance().currentUser!!
+                    userId = user.uid
+                    if (userId != null) {
+                        if (spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
+                            var costE: Double = cost.text.toString().toDouble()
+                            costE *= -1
+                            iaeDao.addIaE(
+                                IaE(
+                                    0,
+                                    userId,
+                                    spinnerTypeResultCategory,
+                                    title.text.toString(),
+                                    costE.toString(),
+                                    spinnerTypeResult
+                                )
+                            )
+                        } else if (spinnerTypeResult == "Income" && spinnerTypeResult != "Expense") {
+                            val costI: Double = cost.text.toString().toDouble()
+                            iaeDao.addIaE(
+                                IaE(
+                                    0,
+                                    userId,
+                                    "+",
+                                    title.text.toString(),
+                                    costI.toString(),
+                                    spinnerTypeResult
+                                )
+                            )
+                        }
+
+                        val intent = Intent(this, IncomeAndExpense::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        Toast.makeText(
+                            baseContext,
+                            "Something wrong, please try again later",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
     }
 
 
@@ -118,22 +143,11 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         when (item.itemId) {
             android.R.id.home -> {
                 val intent = Intent(this, IncomeAndExpense::class.java)
-                finish()
                 startActivity(intent)
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
-
-    /*
-    private fun updateDBView() {
-        var dbText: String = ""
-        iaeDao.readSixLasts().forEach() {
-            dbText += "${it.type}" + "${it.title}" + "${it.cost}"
-        }
-        textViewOut.text = dbText
-    }
-
-     */
 
 }
