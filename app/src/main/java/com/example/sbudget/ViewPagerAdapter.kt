@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 class ViewPagerAdapter(supportFragmentManager: FragmentManager) : FragmentStatePagerAdapter(supportFragmentManager) {
 
-    private val mFragmentList = ArrayList<Fragment>()
-    private val mFragmentTitleList = ArrayList<String>()
+    private var mFragmentList = ArrayList<Fragment>()
+    private var mFragmentTitleList = ArrayList<String>()
 
     override fun getItem(position: Int): Fragment {
         return mFragmentList[position]

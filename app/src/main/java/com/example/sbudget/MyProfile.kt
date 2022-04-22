@@ -100,28 +100,3 @@ class MyProfile : AppCompatActivity() {
 
     }
 }
-
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id = item.itemId
-
-        if(id == R.id.ic_graph) {
-
-            val intent = Intent (this, IncomeAndExpense::class.java)
-            finish()
-            startActivity(intent)
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-}
-
-*/

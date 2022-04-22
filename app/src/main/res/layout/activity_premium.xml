@@ -29,9 +29,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             app:tabBackground="@color/black"
+            android:background="@color/black"
             app:tabGravity="fill"
             app:tabMode="fixed"
             app:tabTextColor="@color/white" />

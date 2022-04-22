@@ -2,11 +2,13 @@ package com.example.sbudget
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.sbudget.databinding.ActivityPremiumBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 
 class Premium : AppCompatActivity() {
 
@@ -22,11 +24,12 @@ class Premium : AppCompatActivity() {
         pager = findViewById(R.id.viewPager)
         tab = findViewById(R.id.tabs)
 
-        val adapter = ViewPagerAdapter(supportFragmentManager)
+        var adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(MyBudget(), "My Budget")
-        adapter.addFragment(Memberships(), "My Memberships")
+        //adapter.addFragment(Memberships(), "My Memberships")
         pager.adapter = adapter
         tab.setupWithViewPager(pager)
+
 
 
         binding.bNav.selectedItemId = R.id.ic_money
