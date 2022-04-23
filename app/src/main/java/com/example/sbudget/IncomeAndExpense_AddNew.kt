@@ -20,7 +20,6 @@ import com.google.firebase.ktx.Firebase
 
 class IncomeAndExpense_AddNew : AppCompatActivity() {
 
-    // Spinner variable
     lateinit var spinnerType : Spinner
     lateinit var db : IaE_DATABASE
     lateinit var iaeDao : IaE_DAO
@@ -35,12 +34,13 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Spinner implementation
-
+        // Spinner initializing
         spinnerType = findViewById(R.id.type_selector)
         var spinnerCategory : Spinner = findViewById(R.id.category_selector)
         var spinnerTypeResult : String = ""
         var spinnerTypeResultCategory : String = ""
+
+        // Initializing .xml widgets
         var title: EditText = findViewById(R.id.title)
         var cost: EditText = findViewById(R.id.cost)
         var createBtn: Button = findViewById(R.id.addNew)
@@ -55,17 +55,22 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
         // Initializing DAO
         iaeDao = db.iae_dao()
 
+        // Spinner lists
         val types = arrayOf("Income","Expense")
         val categories = arrayOf("Food & Dining", "Medical", "Housing", "Entertainment", "Another")
+
+        // Set to Arrays spinner-chooses (types and categories)
         val arrayAdapterType = ArrayAdapter(this, R.layout.spinner_list, types)
         val arrayAdapterCategory = ArrayAdapter(this, R.layout.spinner_list, categories)
 
-
+        // Getting spinner textColor and textSize (Settings from spinner_list.xml)
         arrayAdapterType.setDropDownViewResource(R.layout.spinner_list)
         arrayAdapterCategory.setDropDownViewResource(R.layout.spinner_list)
+
         spinnerType.adapter = arrayAdapterType
         spinnerCategory.adapter = arrayAdapterCategory
 
+        // When select item from spinner - set to variable result
         spinnerType.onItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -73,9 +78,12 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                // For avoid mistakes
+                spinnerTypeResult = "Nothing selected"
             }
         }
 
+        // When select item from spinner - set to variable result.
         spinnerCategory.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -83,19 +91,25 @@ class IncomeAndExpense_AddNew : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                // For avoid mistakes
                 spinnerTypeResultCategory = "No category"
             }
         }
 
+            // Creating new IaE
             createBtn.setOnClickListener() {
 
                 if (title.text.isEmpty() || cost.text.isEmpty()) {
                     Toast.makeText(baseContext, "Field must be fill", Toast.LENGTH_SHORT).show()
                 }
                 else {
+                    // Get current user for adding to right place in SQLite
                     user = FirebaseAuth.getInstance().currentUser!!
                     userId = user.uid
                     if (userId != null) {
+
+                        // If left spinner (type) is 'Expense' - also sets category item to categoryResults variable.
+                        // If left spinner (type) is 'Income' - sets category item "+"-String, for avoiding that type in PieChart
                         if (spinnerTypeResult == "Expense" && spinnerTypeResult != "Income") {
                             var costE: Double = cost.text.toString().toDouble()
                             costE *= -1

@@ -24,13 +24,12 @@ class Premium : AppCompatActivity() {
         pager = findViewById(R.id.viewPager)
         tab = findViewById(R.id.tabs)
 
+        // Adding .xml fragments to tabLayout
         var adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(MyBudget(), "My Budget")
         //adapter.addFragment(Memberships(), "My Memberships")
         pager.adapter = adapter
         tab.setupWithViewPager(pager)
-
-
 
         binding.bNav.selectedItemId = R.id.ic_money
         binding.bNav.setOnItemSelectedListener {

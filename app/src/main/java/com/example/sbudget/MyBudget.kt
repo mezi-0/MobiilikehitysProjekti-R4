@@ -39,16 +39,20 @@ class MyBudget : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         piechart = view.findViewById(R.id.myBudget_piechart)
+
+        // Initializing SQLite database
         db = Room.databaseBuilder(
             requireContext(),
             IaE_DATABASE::class.java, "IaE_DB"
         ).allowMainThreadQueries().build()
+
         // Initializing DAO
         iaeDao = db.iae_dao()
         setupPieChartData()
         loadPieChartData()
     }
 
+    // First setup PieChart, then loading it to page
     fun setupPieChartData() {
         piechart.isDrawHoleEnabled = true
         piechart.setUsePercentValues(true)
@@ -59,12 +63,18 @@ class MyBudget : Fragment() {
         piechart.description.isEnabled = false
     }
 
+
     fun loadPieChartData() {
 
+        // Adding few variables for adding data from SQLite to Array
         var amount: String = ""
         var category: String = ""
         val delim = ":"
-        iaeDao.readSixLasts(userId).forEach() {
+
+        // Get lasts ten data from SQLite and adding it to 2 Strings.
+        // Then using delimiter to create Arrays
+        // If 'cost' < 0 - Adds it to variable, if 'cost' => 0 - skip current data and go to next check
+        iaeDao.readTenLasts(userId).forEach() {
             if (it.cost.toFloat() < 0) {
                 amount += "${it.cost}:"
                 category += "${it.category}:"
@@ -76,7 +86,7 @@ class MyBudget : Fragment() {
         val chartList: ArrayList<PieEntry> = ArrayList()
 
 
-        // Categories
+        // Creating variables for costs
         var foodAndDining: Float = 0f
         var medical: Float = 0f
         var housing: Float = 0f
@@ -84,6 +94,7 @@ class MyBudget : Fragment() {
         var another: Float = 0f
         var withOutCategory: Float = 0f
 
+        // Checking IaE for category and amount. Adds all same categories to one cost
         if(amountArray[0].isEmpty()) {
         } else {
         for (i in 0 until amountArray.size - 1) {
@@ -109,6 +120,8 @@ class MyBudget : Fragment() {
             }
         }
 
+        // If cost variable (sum of all costs that's have same category) < 0 - Adds to PieChart that category and cost
+        // And converting cost to positive number, so PieChart will not get negative values
         if (foodAndDining < 0) {
             foodAndDining *= (-1)
             chartList.add(PieEntry(foodAndDining, "Food & Dining"))
@@ -134,7 +147,7 @@ class MyBudget : Fragment() {
             chartList.add(PieEntry(withOutCategory, "Without category"))
         }
 
-
+        // Sets multiply color to PieChart from ColorTemplate (MPAndroidChart)
         val colors = ArrayList<Int>()
         for (color in ColorTemplate.MATERIAL_COLORS) {
             colors.add(color)
@@ -143,11 +156,9 @@ class MyBudget : Fragment() {
             colors.add(color)
         }
 
-
+        /* BarChart settings list */
         pieDataSet = PieDataSet(chartList, "Expense Category")
-
         pieDataSet.colors = colors
-
         pieData = PieData(pieDataSet)
 
         pieData.setDrawValues(true)

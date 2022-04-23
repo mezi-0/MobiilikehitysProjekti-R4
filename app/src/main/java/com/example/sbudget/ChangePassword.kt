@@ -25,11 +25,13 @@ class ChangePassword : AppCompatActivity() {
     }
 
     private fun changePassword() {
+
+        // Getting .xml widgets and current logged user
         val newPasswordFrom : EditText = findViewById(R.id.editPasswordNew)
         val changePasswordBtn : Button = findViewById(R.id.changePassword)
-
         val user = FirebaseAuth.getInstance().currentUser
 
+        // If password => 6 characters, update password and return to previous activity
         changePasswordBtn.setOnClickListener {
             if(newPasswordFrom.text.toString().length < 6) {
                 Toast.makeText(baseContext, "Min password length should be 6 characters!", Toast.LENGTH_SHORT).show()
@@ -47,6 +49,7 @@ class ChangePassword : AppCompatActivity() {
         }
     }
 
+    // Toolbar back button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {

@@ -46,20 +46,29 @@ class SignUp : AppCompatActivity() {
             val passwordR = password2.text.toString().trim()
             val email = eAddress.text.toString().trim()
 
-            if (userName.isEmpty() || password.isEmpty() || passwordR.isEmpty() || email.isEmpty()
-            ) {
+            if (userName.isEmpty() || password.isEmpty() || passwordR.isEmpty() || email.isEmpty()) {
                 Toast.makeText(this, "Field must be fill!", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            } else if(password.length < 6){
+            }
+            // If password < 6 characters
+            else if(password.length < 6){
                 Toast.makeText(this, "Min password lenght should be 6 characters!", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            } else if(password != passwordR) {
+            }
+            // If repeated password wrong
+            else if(password != passwordR) {
                 Toast.makeText(this, "Password not match", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            }
+            // If email-textView text does not match the correct model (Correct: example@example.com)
+            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 Toast.makeText(this, "Password not match", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-            } else{
+            }
+            // If all fields is OK ->
+            else{
+
+                // Creating new user in Firebase authenticated users and Firebase database.
                 val data = UserData(userName, email, "Not member")
                 Firebase.auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener{ task: Task<AuthResult> ->
@@ -77,7 +86,7 @@ class SignUp : AppCompatActivity() {
                                     Toast.makeText(baseContext, "Something wrong with database, please try again later", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
-                            //Registration error
+                            //Registration error, email already in Firebase
                             Toast.makeText(baseContext, "Email already exists", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.INVISIBLE
                         }

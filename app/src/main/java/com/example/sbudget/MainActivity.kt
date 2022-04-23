@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.actionbar_color_gradient))
         setContentView(R.layout.activity_main)
 
-
+        // TextView on Login page. Opens 'ResetPassword' activity
         val txtBtnReset : TextView = findViewById(R.id.button_reset)
         txtBtnReset.setOnClickListener{
             val intent = Intent(this, ResetPassword::class.java)
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-
+        // Button on Login page. Opens 'SignUp' activity
         val btnSignUp : Button = findViewById(R.id.button_sign_up)
         btnSignUp.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
@@ -48,11 +48,13 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-
+        // Widgets from Login page
         val btnLogin = findViewById<Button>(R.id.button_login)
         val email = findViewById<TextView>(R.id.text_email)
         val password = findViewById<TextView>(R.id.text_password)
 
+        // When button clicked - checks credentials from Firebase authentication.
+        // If credentials from Firebase is OK - logins in app
         btnLogin.setOnClickListener {
             val email: String = email.text.toString().trim()
             val password: String = password.text.toString().trim()

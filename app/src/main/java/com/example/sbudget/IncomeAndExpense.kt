@@ -43,10 +43,11 @@ class IncomeAndExpense : AppCompatActivity() {
             applicationContext,
             IaE_DATABASE::class.java, "IaE_DB"
         ).allowMainThreadQueries().build()
+
         // Initializing DAO
         iaeDao = db.iae_dao()
 
-        // Bottom nav menu
+        // Bottom navigation menu
         binding.bNav.selectedItemId = R.id.ic_graph
         binding.bNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -64,7 +65,7 @@ class IncomeAndExpense : AppCompatActivity() {
             true
         }
 
-        // Button open new activity for adding new IaE
+        // Button which open new activity for adding new IaE (IncomeAndExpense)
         val addNewIaEBtn =  findViewById<Button>(R.id.addTulotMenotBtn)
         addNewIaEBtn.setOnClickListener {
             val intent = Intent(this, IncomeAndExpense_AddNew::class.java)
@@ -72,7 +73,7 @@ class IncomeAndExpense : AppCompatActivity() {
             finish()
         }
 
-        // Layout TextView:s initialization
+        // .xml TextViews initialization
         val text0: TextView = findViewById(R.id.tulotMenotText1)
         val text1: TextView = findViewById(R.id.tulotMenotText2)
         val text2: TextView = findViewById(R.id.tulotMenotText3)
@@ -80,7 +81,7 @@ class IncomeAndExpense : AppCompatActivity() {
         val text4: TextView = findViewById(R.id.tulotMenotText5)
         val text5: TextView = findViewById(R.id.tulotMenotText6)
 
-        // Creating Array for all TextView elements for easier using
+        // Creating Array for all TextView elements for easier using when combines data from SQLite
         val textArray = arrayListOf<TextView>(
             text0,
             text1,
@@ -90,7 +91,7 @@ class IncomeAndExpense : AppCompatActivity() {
             text5
         )
 
-        // Get lasts six data from SQLite and adding it to one String. Then use delimitter, for creating Array<>
+        // Get lasts six data from SQLite and adding it to one String. Then using delimiter to create Array
         var str: String = ""
         val delim = ":"
         iaeDao.readSixLasts(userId).forEach() {
@@ -98,11 +99,11 @@ class IncomeAndExpense : AppCompatActivity() {
         }
         val strArray = str.split(delim).toTypedArray()
 
-        // If Array is empty - get FATAL error and app close, but with this if() statement app stays opened
+        // If Array is empty - get FATAL error and app close, but with this if() statement app stays opened without error
+        // Add elements in TextView Array, if data from SQLite not empty
         if(strArray[0].isEmpty()) {
             // Nothing to do
         } else {
-            // Add elements in TextView Array, if data from SQLite not empty
             for (i in 0 until strArray.size - 1) {
                 textArray[i].text = strArray[i]
             }
@@ -110,11 +111,15 @@ class IncomeAndExpense : AppCompatActivity() {
         }
     }
 
+    // Creating BarChart, which use data from SQLite
     private fun chartCreating() {
 
+        // Initializing BarChart widget
         val barChart = findViewById<BarChart>(R.id.barChart)
         var amount: String = ""
         val delim = ":"
+
+        // Get lasts ten data from SQLite and adding it to one String. Then using delimiter to create Array
         iaeDao.readTenLasts(userId).forEach() {
             amount += "${it.cost}:"
         }
@@ -128,23 +133,29 @@ class IncomeAndExpense : AppCompatActivity() {
 
 
 
-        // List settings
+        /* BarChart settings list */
+
+        // BarChart initializing and title for Chart
         barDataSet = BarDataSet(barList, "IncomeAndExpense Diagram")
         barData = BarData(barDataSet)
 
+        // BarChart colors. Can be multiply colors
         barDataSet.setColors(Color.parseColor("#304567"))
+
         barChart.data = barData
         barChart.invalidate()
         barChart.setBackgroundColor(Color.rgb(255,255,255))
 
-        // Disable background grid lines
+        // Disable background grid-lines and legend
         barChart.axisRight.setDrawGridLines(false)
         barChart.axisLeft.setDrawGridLines(false)
         barChart.xAxis.setDrawGridLines(false)
         barChart.legend.isEnabled=false
 
+        // Disable description at bottom left
         barChart.description.isEnabled = false
 
+        // BarChart text color and size
         barDataSet.valueTextColor = Color.BLACK
         barDataSet.valueTextSize = 16f
 

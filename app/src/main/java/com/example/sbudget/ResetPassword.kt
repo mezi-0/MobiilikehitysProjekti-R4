@@ -34,6 +34,7 @@ class ResetPassword : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    // Send reset link to email-address
     private fun sendEmail() {
         val email = emailEditText.text.toString().trim()
         if(email.isEmpty()) {
