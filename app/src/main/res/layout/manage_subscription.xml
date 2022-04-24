@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Status"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Duration"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text=":"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
         <TextView
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text=":"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -136,8 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Status"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
 
@@ -146,8 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Duration"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/subscriptionInfo"
             app:layout_constraintTop_toBottomOf="@+id/subscriptionInfo" />
     </LinearLayout>

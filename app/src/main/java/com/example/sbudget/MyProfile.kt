@@ -15,6 +15,7 @@ class MyProfile : AppCompatActivity() {
 
 
     lateinit var binding: ActivityMyProfileBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
@@ -81,16 +82,16 @@ class MyProfile : AppCompatActivity() {
                     }
 
                     if(userName.length > 15) {
-                        usernameText.setText(userName.substring(0, 15) + "...")
+                        usernameText.text = userName.substring(0, 15) + "..."
                     } else if (userName.length <= 15) {
-                        usernameText.setText(userName)
+                        usernameText.text = userName
                     }
                     if(email.length > 15) {
-                        emailText.setText(email.substring(0, 15) + "...")
+                        emailText.text = email.substring(0, 15) + "..."
                     } else if(email.length <= 15) {
-                        emailText.setText(email)
+                        emailText.text = email
                     }
-                        levelText.setText(level)
+                    levelText.text = level
 
 
                 }
